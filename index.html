@@ -524,6 +524,30 @@
                         <div class="album-desc">Bukan cuma foto yang tercetak, tapi juga momen yang gak akan terlupakan.</div>
                     </div>
                 </div>
+
+                 <!-- Album 7: cafe -->
+                <div class="album-item" onclick="openAlbum('cafe')">
+                    <div class="album-thumbnail">
+                        <img src="images/bgdl1.jpg" alt="cafe">
+                        <div class="album-badge">20 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">💥 Daily Life</div>
+                        <div class="album-desc">Keseruan dan kehangatan di setiap hari yang kita habiskan bersama.</div>
+                    </div>
+                </div>
+
+                   <!-- Album 8: first -->
+                <div class="album-item" onclick="openAlbum('first')">
+                    <div class="album-thumbnail">
+                        <img src="images/bgf.jpg" alt="first">
+                        <div class="album-badge">8 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">💞 First Date</div>
+                        <div class="album-desc">Pertemuan pertama yang akhirnya jadi awal dari segalanya 💖.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -736,7 +760,43 @@
                     { url: 'images/fb13.jpg', caption: 'Foto Box' },
                     { url: 'images/fb14.jpg', caption: 'Foto Box' },
                 ]
-            }
+            },
+             cafe: {
+                title: '💥 Daily Life',
+                photos: [
+                    { url: 'images/dl1.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl2.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl3.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl4.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl6.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl7.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl10.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl11.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl12.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl13.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl14.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl15.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl16.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl17.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl18.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl19.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl20.jpg', caption: 'Daily Life' },
+                    { url: 'images/dl21.jpg', caption: 'Daily Life' },
+                ]
+             },
+             first: {
+                title: '💞 First Date',
+                photos: [
+                    { url: 'images/fr1.jpg', caption: 'First Date' },
+                    { url: 'images/fr2.jpg', caption: 'First Date' },
+                    { url: 'images/fr3.jpg', caption: 'First Date' },
+                    { url: 'images/fr4.jpg', caption: 'First Date' },
+                    { url: 'images/fr5.jpg', caption: 'First Date' },
+                    { url: 'images/fr6.jpg', caption: 'First Date' },
+                    { url: 'images/fr8.jpg', caption: 'First Date' },
+                    { url: 'images/fr9.jpg', caption: 'First Date' },
+             ]
+             }
         };
 
         function openAlbum(albumName) {
