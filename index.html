@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Love Timer Section */
+        .love-timer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer-title {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .start-date {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-number {
+            font-size: 36px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* Couple Profile Section */
+        .couple-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            font-size: 28px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .profile-role {
+            font-size: 18px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        /* Album Moments Section */
+        .moments-section {
+            margin-top: 40px;
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .album-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .album-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .album-thumbnail {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .album-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .album-item:hover .album-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .album-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #667eea;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        .album-details {
+            padding: 20px;
+        }
+
+        .album-title {
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .album-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-album-title {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 1;
+            background: #222;
+            cursor: pointer;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-caption {
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 28px;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-name {
+                font-size: 24px;
+            }
+
+            .timer-display {
+                gap: 10px;
+            }
+
+            .timer-box {
+                min-width: 80px;
+                padding: 15px;
+            }
+
+            .timer-number {
+                font-size: 28px;
+            }
+
+            .album-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .modal-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Love Timer Section -->
+        <div class="love-timer">
+            <div class="timer-title">💕 Kita Sudah Bersama Selama 💕</div>
+            <div class="start-date" id="startDateDisplay">Sejak: 13 Maret 2024</div>
+            <div class="timer-display">
+                <div class="timer-box">
+                    <span class="timer-number" id="years">0</span>
+                    <span class="timer-label">Tahun</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="months">0</span>
+                    <span class="timer-label">Bulan</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="days">0</span>
+                    <span class="timer-label">Hari</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="hours">0</span>
+                    <span class="timer-label">Jam</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="minutes">0</span>
+                    <span class="timer-label">Menit</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="seconds">0</span>
+                    <span class="timer-label">Detik</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Couple Profile Section -->
+        <h1 class="section-title">💑 Our Love Story</h1>
+        
+        <div class="couple-section">
+            <!-- Profile 1 -->
+            <div class="profile-card">
+                <div class="profile-image">
+                    <!-- 
+                    ========================================
+                    CARA GANTI FOTO PROFIL PRIA:
+                    1. Upload foto ke hosting (imgur.com, imgbb.com, atau Google Drive)
+                    2. Salin link URL foto
+                    3. Ganti URL di bawah ini (di dalam tanda kutip src="...")
+                    ========================================
+                    -->
+                    <img src="cp1.jpg" alt="Foto Pria">
+                </div>
+                <div class="profile-name">Fikri Afriansyah</div>
+                <div class="profile-role">My Love ❤️</div>
+                <div class="profile-bio">
+                    Seseorang yang selalu membuat hari-hariku lebih berwarna dan penuh kebahagiaan
+                </div>
+            </div>
+
+            <!-- Profile 2 -->
+            <div class="profile-card">
+                <div class="profile-image">
+                    <!-- 
+                    ========================================
+                    CARA GANTI FOTO PROFIL WANITA:
+                    1. Upload foto ke hosting (imgur.com, imgbb.com, atau Google Drive)
+                    2. Salin link URL foto
+                    3. Ganti URL di bawah ini (di dalam tanda kutip src="...")
+                    ========================================
+                    -->
+                    <img src="cp2.jpg" alt="Foto Wanita">
+                </div>
+                <div class="profile-name">Hilwa Fauziah</div>
+                <div class="profile-role">My Queen 👑</div>
+                <div class="profile-bio">
+                    Cahaya dalam hidupku yang selalu memberikan cinta dan kehangatan setiap hari
+                </div>
+            </div>
+        </div>
+
+        <!-- Album Moments Section -->
+        <div class="moments-section">
+            <h2 class="section-title">📸 Our Moments</h2>
+            
+            <div class="album-grid">
+                <!-- Album 1: Anniversary -->
+                <div class="album-item" onclick="openAlbum('anniversary')">
+                    <div class="album-thumbnail">
+                        <!-- 
+                        ========================================
+                        CARA GANTI FOTO COVER ALBUM:
+                        Ganti URL di src="..." dengan link foto Anda
+                        ========================================
+                        -->
+                        <img src="bgan1.jpg" alt="Anniversary">
+                        <div class="album-badge">6 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">🎉 Anniversary</div>
+                        <div class="album-desc">Momen spesial perayaan anniversary kita yang tak terlupakan</div>
+                    </div>
+                </div>
+
+                <!-- Album 2: Travel -->
+                <div class="album-item" onclick="openAlbum('travel')">
+                    <div class="album-thumbnail">
+                        <img src="bgg.jpg" alt="Gunung">
+                        <div class="album-badge">22 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">⛰️ Gunung</div> 
+                        <div class="album-desc">Album ini bukan cuma tentang foto, tapi tentang semangat, sabar, dan rasa syukur.</div>
+                    </div>
+                </div>
+
+                <!-- Album 3: Daily -->
+                <div class="album-item" onclick="openAlbum('daily')">
+                    <div class="album-thumbnail">
+                        <img src="images/bgp.jpg" alt="Pantai">
+                        <div class="album-badge">17 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">🏖️ Pantai</div>
+                        <div class="album-desc">Pegangan tangan di tepi ombak, biar dunia tahu, kita berjalan di arah yang sama.</div>
+                    </div>
+                </div>
+
+                <!-- Album 4: Date Night -->
+                <div class="album-item" onclick="openAlbum('date')">
+                    <div class="album-thumbnail">
+                        <img src="images/bgmv.jpg" alt="Date">
+                        <div class="album-badge">22 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">🎥 Movie Date</div>
+                        <div class="album-desc">Ceritanya di layar, tapi yang paling indah tetap cerita kita di kursi sebelah.</div>
+                    </div>
+                </div>
+
+                <!-- Album 5: Special -->
+                <div class="album-item" onclick="openAlbum('special')">
+                    <div class="album-thumbnail">
+                        <img src="images/bgmm.jpg" alt="Special">
+                        <div class="album-badge">23 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">⭐ Special Moments</div>
+                        <div class="album-desc">Momen-momen istimewa yang selalu terukir di hati kita</div>
+                    </div>
+                </div>
+
+                <!-- Album 6: Family -->
+                <div class="album-item" onclick="openAlbum('family')">
+                    <div class="album-thumbnail">
+                        <img src="images/bgfb.jpg" alt="Family">
+                        <div class="album-badge">14 Photos</div>
+                    </div>
+                    <div class="album-details">
+                        <div class="album-title">📸 Foto Box</div>
+                        <div class="album-desc">Bukan cuma foto yang tercetak, tapi juga momen yang gak akan terlupakan.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Album -->
+    <div class="modal" id="albumModal">
+        <div class="modal-header">
+            <div class="modal-album-title" id="modalTitle">Album Title</div>
+            <div class="close-btn" onclick="closeModal()">×</div>
+        </div>
+        <div class="modal-body">
+            <div class="photo-grid" id="photoGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // GANTI TANGGAL JADIAN DI SINI
+        // Format: Tahun, Bulan (0-11, dimana 0=Januari), Tanggal, Jam, Menit
+        // ========================================
+        const relationshipStartDate = new Date(2024, 2, 13, 0, 0, 0); // 13 Maret 2024, 00:00:00
+
+        // Update display tanggal jadian
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        document.getElementById('startDateDisplay').textContent = `Sejak: ${relationshipStartDate.getDate()} ${months[relationshipStartDate.getMonth()]} ${relationshipStartDate.getFullYear()}`;
+
+        // Fungsi untuk menghitung waktu berjalan
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - relationshipStartDate;
+
+            // Hitung tahun, bulan, hari
+            let years = now.getFullYear() - relationshipStartDate.getFullYear();
+            let months = now.getMonth() - relationshipStartDate.getMonth();
+            let days = now.getDate() - relationshipStartDate.getDate();
+            let hours = now.getHours() - relationshipStartDate.getHours();
+            let minutes = now.getMinutes() - relationshipStartDate.getMinutes();
+            let seconds = now.getSeconds() - relationshipStartDate.getSeconds();
+
+            // Koreksi jika ada nilai negatif
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+            if (days < 0) {
+                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += prevMonth.getDate();
+                months--;
+            }
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+
+            // Update tampilan
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Update timer setiap detik
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // ========================================
+        // DATA ALBUM - GANTI URL FOTO DI SINI
+        // Untuk menambah foto: tambahkan objek baru dengan format:
+        // { url: 'LINK_FOTO_ANDA', caption: 'Deskripsi foto' },
+        // ========================================
+        const albumData = {
+            anniversary: {
+                title: '🎉 Anniversary',
+                photos: [
+                    { url: 'anv1.jpg', caption: 'Momen Anniversary #1' },
+                    { url: 'anv2.jpg', caption: 'Momen Anniversary #2' },
+                    { url: 'anv3.jpg', caption: 'Momen Anniversary #3' },
+                    { url: 'anv4.jpg', caption: 'Momen Anniversary #4' },
+                    { url: 'anv5.jpg', caption: 'Momen Anniversary #5' },
+                    { url: 'anv6.jpg', caption: 'Momen Anniversary #6' },
+                ]
+            },
+            travel: {
+                title: '⛰️ Gunung',
+                photos: [
+                    { url: 'gs1.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gs2.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gs3.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gs4.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gs5.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gs6.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gs7.jpg', caption: 'Gunung Sunan Ibu' },
+                    { url: 'gk1.jpg', caption: 'Gunung Kuta' },
+                    { url: 'gk2.jpg', caption: 'Gunung Kuta' },
+                    { url: 'gk3.jpg', caption: 'Gunung Kuta' },
+                    { url: 'gk4.jpg', caption: 'Gunung Kuta' },
+                    { url: 'gg1.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg2.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg3.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg4.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg5.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg6.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg7.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg8.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg9.jpg', caption: 'Gunung Gede' },
+                    { url: 'gg1o.jpg', caption: 'Gunung Gede' },
+                ]
+            },
+            daily: {
+                title: '🏖️ Pantai',
+                photos: [
+                    { url: 'images/p1.jpg', caption: 'Pantai' },
+                    { url: 'images/p2.jpg', caption: 'Pantai' },
+                    { url: 'images/p3.jpg', caption: 'Pantai' },
+                    { url: 'images/p4.jpg', caption: 'Pantai' },
+                    { url: 'images/p5.jpg', caption: 'Pantai' },
+                    { url: 'images/p6.jpg', caption: 'Pantai' },
+                    { url: 'images/p7.jpg', caption: 'Pantai' },
+                    { url: 'images/p8.jpg', caption: 'Pantai' },
+                    { url: 'images/p9.jpg', caption: 'Pantai' },
+                    { url: 'images/p10.jpg', caption: 'Pantai' },
+                    { url: 'images/p11.jpg', caption: 'Pantai' },
+                    { url: 'images/p12.jpg', caption: 'Pantai' },
+                    { url: 'images/p13.jpg', caption: 'Pantai' },
+                    { url: 'images/p14.jpg', caption: 'Pantai' },
+                    { url: 'images/p15.jpg', caption: 'Pantai' },
+                    { url: 'images/p16.jpg', caption: 'Pantai' },
+                    { url: 'images/p17.jpg', caption: 'Pantai' },
+                ]
+            },
+            date: {
+                title: '🎥 Movie Date',
+                photos: [
+                    { url: 'images/mv1.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv2.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv3.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv4.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv5.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv6.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv7.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv8.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv9.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv10.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv11.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv12.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv13.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv14.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv15.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv16.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv17.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv18.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv19.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv20.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv21.jpg', caption: 'Movie Date' },
+                    { url: 'images/mv22.jpg', caption: 'Movie Date' },
+                ]
+            },
+            special: {
+                title: '⭐ Special Moments',
+                photos: [
+                    { url: 'images/mm1.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm2.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm3.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm4.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm5.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm6.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm7.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm8.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm9.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm10.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm11.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm12.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm13.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm14.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm16.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm17.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm18.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm19.jpg', caption: 'Birtdhay Fikri' },
+                    { url: 'images/mm20.jpg', caption: 'Birtdhay Hilwa' },
+                    { url: 'images/mm21.jpg', caption: 'Birtdhay Hilwa' },
+                    { url: 'images/mm22.jpg', caption: 'Birtdhay Hilwa' },
+                    { url: 'images/mm23.jpg', caption: 'Birtdhay Hilwa' },
+                ]
+            },
+            family: {
+                title: '📸 Foto Box',
+                photos: [
+                    { url: 'images/fb1.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb2.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb3.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb4.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb5.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb6.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb7.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb8.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb9.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb10.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb11.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb12.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb13.jpg', caption: 'Foto Box' },
+                    { url: 'images/fb14.jpg', caption: 'Foto Box' },
+                ]
+            }
+        };
+
+        function openAlbum(albumName) {
+            const modal = document.getElementById('albumModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const photoGrid = document.getElementById('photoGrid');
+            
+            const album = albumData[albumName];
+            modalTitle.textContent = album.title;
+            
+            photoGrid.innerHTML = '';
+            
+            album.photos.forEach(photo => {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
+                photoCard.innerHTML = `
+                    <img src="${photo.url}" alt="${photo.caption}">
+                    <div class="photo-overlay">
+                        <div class="photo-caption">${photo.caption}</div>
+                    </div>
+                `;
+                photoGrid.appendChild(photoCard);
+            });
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('albumModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal saat klik di luar area
+        document.getElementById('albumModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal dengan tombol ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
